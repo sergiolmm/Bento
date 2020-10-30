@@ -1,0 +1,109 @@
+  usando listas
+  
+    scafold
+    
+     container
+       padding (20)
+       child:
+       
+       		ListView.builder(
+       		   itemCount: -> numero de items)
+       		   itemBuilder () {}  -> função anonima
+       		   	(context, indece) {
+       		   	
+       		   	   print("item ${indece}
+       		   	   
+       		   	   returl ListTile(  -> lista de items a ser vista
+       		   	   	title: Text(indice.toSting()
+       		   	   	subTitle : Text("alo")
+       		   	   }
+       		   	   
+       		   	}
+       		   
+       		   
+List estitica
+
+	List _itens = [];
+	
+	void _carregarItens() {
+	
+	 _itens = [];// hot reload...
+		for (int i= 0; i< 10; i++)
+		{
+		 Map<String, dynamic> item = Map();
+		 item["titulo" = "Titluo ${i} Lorem ipsum...";
+		 
+		 item["Descrição" = "Descrição ${i} Lorem ipsum...";
+		 
+		 _itens.add(item);
+		
+		}
+	
+	
+	}
+	
+	
+	
+	antes do retorno chamara a função _carregarItens
+	
+	
+	print ("Items ${_itens[indice],toString();}").  // duas maneira para trabalhsoe mostrando 
+	
+	Map<String, dynamic> item = _itens[indice]
+	
+	
+	no return listTile usar _itens[indice]["titulo"]
+	
+	
+	
+
+
+
+evento de click na lista
+
+	onTap: -> função anonima
+	
+	onLongPress: () {}   -> print para mostrar exemplo
+	
+
+
+clicar na lista e mstrar um alerta
+
+	AlertDialog
+	showDialog(
+	  context : context,
+	  builder: (context) {
+	   return AlertDialog(
+	     title: Text("titulo");  // pode copiar o valor _itens[indice]
+	     titlePadding:
+	     titleStyle:
+	     content: Text("Conteudo");
+	     contentPadding:
+	     contentStyle:
+	     backgoundColor
+	    
+	     actions: <Widget> [
+	        FlatButton(
+	          onPressed: (){};
+	          child: Text("ss"),
+	          
+	        ),
+	         FlatButton(
+			          onPressed: (
+			          
+			          para fechar a tela 
+			          Navigator.pop(context);
+			          ){};
+			          child: Text("sim"),
+			          
+	        )
+	     ] 
+	     
+	     
+	    
+	   );
+	  }
+	  );
+	
+	
+	
