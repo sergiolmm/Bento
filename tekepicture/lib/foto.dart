@@ -37,7 +37,7 @@ class _fotoState extends State<foto> {
     try {
       await _initializeCameraControllerFuture;
 
-      final path =n
+      final path =
           join((await getTemporaryDirectory()).path, '${DateTime.now()}.png');
 
       await _cameraController.takePicture(path);
