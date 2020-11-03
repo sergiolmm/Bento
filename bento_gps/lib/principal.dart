@@ -77,11 +77,11 @@ class _principalState extends State<principal> {
                 if (_permissionGranted == PermissionStatus.denied) {
                   obterPermissao();
                 } else {
-                  _obterLocalizacao().then((value) {
+                  .then((value) {
                     setState(() {
                       MsgCoordenada = _locationData.latitude.toString() +
                           "\n" +
-                          _locationData.longitude.toString();
+                       _obterLocalizacao()   _locationData.longitude.toString();
                     });
                   });
                 }
