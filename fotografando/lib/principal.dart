@@ -4,6 +4,11 @@ import 'package:location/location.dart';
 import 'dart:io' as io;
 import 'package:fotografando/foto.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+
+
 class home extends StatefulWidget {
   @override
   _homeState createState() => _homeState();
@@ -47,6 +52,22 @@ class _homeState extends State<home> {
       print(result);
       img = Image.file(io.File(result),
           width: 250, height: 200, fit: BoxFit.fill);
+    });
+  }
+
+//post da informação
+  _PostDataToRestAPI() async {
+    String id = _editingController.text;
+    String url = "http://www.slmm.com.br/ws/exe1/index2.php?tipo=json&id=" + id;
+    http.Response response;
+    response = await http.get(url);
+    print('Resposta' + response.statusCode.toString());
+    Map<String, dynamic> retorno = json.decode(response.body);
+
+    String imgBruta = retorno["img_64"];
+    Uint8List imagemConv = base64Decode(imgBruta);
+    setState(() {
+      imgRest = new Image.memory(imagemConv);
     });
   }
 

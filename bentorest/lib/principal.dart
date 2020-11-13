@@ -60,6 +60,7 @@ class _principalState extends State<principal> {
                     InputDecoration(labelText: "Digite o id da imagem?"),
                 controller: _editingController,
                 autofocus: true,
+                on
                 onSubmitted: (newValue) {
                   print(newValue);
                 },
