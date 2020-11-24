@@ -6,8 +6,7 @@ import 'package:fotografando/foto.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-
+import 'dart:typed_data';
 
 class home extends StatefulWidget {
   @override
@@ -15,12 +14,16 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  TextEditingController _editingController;
+
   var location = new Location();
   PermissionStatus _permissionGranted;
   bool _serviceEnabled;
 
   Image img =
       Image.asset('img/camera.jpg', width: 250, height: 200, fit: BoxFit.fill);
+
+  Image imgRest;
 
   void serviceStatus() async {
     _serviceEnabled = await location.serviceEnabled();
@@ -67,7 +70,7 @@ class _homeState extends State<home> {
     String imgBruta = retorno["img_64"];
     Uint8List imagemConv = base64Decode(imgBruta);
     setState(() {
-      imgRest = new Image.memory(imagemConv);
+      img = new Image.memory(imagemConv);
     });
   }
 
@@ -78,6 +81,13 @@ class _homeState extends State<home> {
     if (_permissionGranted == PermissionStatus.denied) {
       obterPermissao();
     }
+    _editingController = TextEditingController(text: "0");
+  }
+
+  @override
+  void dispose() {
+    _editingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -86,11 +96,28 @@ class _homeState extends State<home> {
       padding: EdgeInsets.all(30),
       child: Column(
         children: [
+          TextField(
+            keyboardType: TextInputType.number,
+            style: TextStyle(fontSize: 20),
+            decoration: InputDecoration(labelText: "Digite o id da imagem?"),
+            controller: _editingController,
+            autofocus: true,
+            onSubmitted: (newValue) {
+              print(newValue);
+            },
+          ),
           RaisedButton(
             child: Icon(Icons.camera),
             onPressed: () {
               // tirar a foto
               _takeFoto();
+            },
+          ),
+          RaisedButton(
+            child: Icon(Icons.camera),
+            onPressed: () {
+              // tirar a foto
+              _PostDataToRestAPI();
             },
           ),
           Center(
